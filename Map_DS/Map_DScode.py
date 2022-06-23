@@ -1,6 +1,4 @@
-
-
-import os, os.path, json, folium, requests
+import os, os.path, json, folium, requests, re
 from folium import plugins
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -16,36 +14,35 @@ else:
     
 Map_geo = json.load(open('ctp_rvn.zip.geojson',encoding='utf-8')) # json geo 파일 불러들이기
 
-df = pd.read_csv('20220623_태양광+발전소+누적+실치현황.csv')
+df_installation = pd.read_csv('20220623_태양광+발전소+누적+실치현황.csv')
+df_power_generation = pd.read_csv('20220623_2021년+신규+발전량+현황.csv')
+df_installation = df_installation.iloc[:,[0,5]]   # 필요한 값만 가져온다(시도별 이름, 태양전지 개수)
 
-df = df.iloc[:,[0,5]]   # 필요한 값만 가져온다(시도별 이름, 태양전지 개수)
-
-Solar_Data = df.iloc[:,1].astype(str)       # 각 값들을 문자로 바꾼다
-df.rename(columns={'구분':'name'},inplace=True)   # 컬럼들의 이름을 바꾼디.
-df.rename(columns={'누적 발전소 개소(2021년까지)':'name'},inplace=True)
+df_installation.rename(columns={'구분':'name'},inplace=True)
+df_installation.rename(columns={'누적 발전소 개소(2021년까지)': '태양 전지 개수'},inplace=True) 
 
 for idx,dic in enumerate(Map_geo['features']):
-    dic['properties'].update({'name':str(0),'cnt':str(df.iloc[idx,1])}) # 모든 데이터를 다 돌면서 geojson파일에 시도별 이름과 태양전기 개수를 추가시킨다.
-    txt = f'<b><h4>{df.iloc[idx,0]}</h4></b>태양전지 설치 개수: {str(df.iloc[idx,1])}'   # html로 작성하여 딕셔너리에 넣는다.
-    dic['properties']['name'] = txt   
+    dic['properties'].update({'name':str(df_installation.iloc[idx,0]),'태양 전지 개수':str(df_installation.iloc[idx,1]),'html':str(0)})
+    txt = f'<b><h4>{df_installation.iloc[idx,0]}</h4></b>태양전지 설치 개수: {str(df_installation .iloc[idx,1])}'   # html로 작성하여 딕셔너리에 넣는다.
+    dic['properties']['html'] = txt   
+    
 
+    
 m = folium.Map(
     location=[37.559819, 126.963895],     # 서울의 위도,경도를 중심으로 잡는다.
-    tiles="OpenStreetMap",
+    tiles='OpenStreetMap',
     zoom_start=7, 
 )
 
-
-cho = folium.Choropleth(        # 경계선 그리기
+cho = folium.Choropleth(
     geo_data=Map_geo,
-    data=Solar_Data,
-    name='태양전지 현황',
-    columns=[df.iloc[:,0],Solar_Data],
-    fill_color='RdYlGn',
+    data=df_installation,
+    fill_color='OrRd',
+    columns=['name','태양 전지 개수'],
+    key_on = 'feature.properties.name',
     fill_opacity=0.7,
-#     key_on = 'features.properties.name',
     line_opacity=0.5,
-    legend_name='soloar'
+    legend_name='태양 전지 개수'
 ).add_to(m)
 
 plugins.Fullscreen(position='topright',
@@ -54,7 +51,7 @@ plugins.Fullscreen(position='topright',
                    force_separate_button=True
                   ).add_to(m)
 
-cho.geojson.add_child(folium.features.GeoJsonTooltip(['name'],labels=False))    # 지도에 마우스를 올렸을때 정보 
+cho.geojson.add_child(folium.features.GeoJsonTooltip(['html'],labels=False))
 title_html = '<h3 align="center" style="font-size:20px"><b>solar</b></h3>'
 m.get_root().html.add_child(folium.Element(title_html))
 folium.LayerControl().add_to(m)
