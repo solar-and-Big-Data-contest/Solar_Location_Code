@@ -24,7 +24,6 @@ def calNreldata_monthly(system_capacity = 4, azimuth = 180, tilt = 20,lat = 40,l
 
     response = requests.get(URL_PVWATTS6)
     json_obj = response.json()
-    print(json_obj)
     try: 
       ac_annual = json_obj['outputs']['ac_annual']
       solrad_mon = list(json_obj['outputs']['solrad_monthly'])
@@ -44,7 +43,6 @@ Location = list()        # 주소를 담을 변수
 if __name__ == '__main__':
     Len = len(df.iloc[:,1])
     for i in range(Len):        # 모든 데이터를 다 돌면서 nrel에 넣는다.
-        print(i,"번쨰")
         area = df.loc[i,' 면적(공부) ']  #면적 받아오기
         lat = df.loc[i,'lat']   # 위도
         lng = df.iloc[i,'lng']   # 경도
@@ -63,8 +61,7 @@ if __name__ == '__main__':
 
         else:
             Land_df2.loc[i]=ac_Mon+solrad_mon+[solrad_annual]+[ac_annual]
-        print()
-        print()
+    
         
 Land_df2['주소'] = Location
 Land_df2
