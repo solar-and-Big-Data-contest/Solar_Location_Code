@@ -24,13 +24,11 @@ df_ac_mon = df_ac_mon.groupby('노선명').sum().astype(int)
 x = list(df_ac_mon.columns)
 plt.figure(figsize=(15,5))
 
-# name = df_ac_mon.index
-
 color = ['black','navy','forestgreen','slategrey','red','royalblue','teal','gold','darkorange','rosybrown','indigo','aqua','purple','lawngreen','violet'
          ,'silver','rosybrown','lightcoral','brown','deepskyblue','olive','darkseagreen','dodgerblue','peru','pink'
         ]
 
-temp = ['경전선','중앙선','동해중부 미건설선','장항선','경부선','장항선','전라선']
+temp = ['경전선','중앙선','동해중부 미건설선','장항선','경부선','경춘선','전라선']
 
 for i in range(7):
     y = list(df_ac_mon.loc[temp[i]])
@@ -51,4 +49,4 @@ plt.legend(name,loc='upper center', ncol=2, bbox_to_anchor=(-0.4, 1))
 plt.show()
 
 
-# 1: 경전선, 2: 중앙선, 3: 동해중부 미건설선, 4: 장항선, 5: 경부선, 6: 장항선, 7: 전라선
+# 1: 경전선, 2: 중앙선, 3: 동해중부 미건설선, 4: 장항선, 5: 경부선, 6: 경춘선, 7: 전라선
