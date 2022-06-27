@@ -7,3 +7,7 @@
 
 # 지역 그래프
 <img width="991" alt="스크린샷 2022-06-26 오후 2 44 23" src="https://user-images.githubusercontent.com/62462552/175801142-d53f83c4-88e6-4eda-8d75-3fe8c8a7d1d5.png">
+
+# 노선의 연간 예측 발전량, 면적 
+
+<img width="989" alt="스크린샷 2022-06-27 오후 6 56 50" src="https://user-images.githubusercontent.com/62462552/175919631-f2d6bb25-257d-42cb-b13e-7b1fecf46b9f.png">
