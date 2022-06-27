@@ -1,8 +1,8 @@
 # solrad_annual
 
-![newplot](https://user-images.githubusercontent.com/62462552/175801457-a363be15-e79b-4dc8-b2b4-186997336515.png)
+![newplot](https://user-images.githubusercontent.com/62462552/175864754-0739eee6-08df-4f69-95f5-3addf912da47.png)
 
 
 # ac_annual
 
-![newplot (1)](https://user-images.githubusercontent.com/62462552/175801467-d8c93049-9f78-4987-898d-8ec66a438ec1.png)
+![newplot](https://user-images.githubusercontent.com/62462552/175864733-0223ab27-ef57-4ee9-b79e-b05c728791be.png)
