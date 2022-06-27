@@ -24,18 +24,18 @@ df_ac_mon = df_ac_mon.groupby('노선명').sum().astype(int)
 x = list(df_ac_mon.columns)
 plt.figure(figsize=(15,5))
 
-# name = df_ac_mon.index
+name = df_ac_mon.index
+
 
 color = ['black','navy','forestgreen','slategrey','red','royalblue','teal','gold','darkorange','rosybrown','indigo','aqua','purple','lawngreen','violet'
          ,'silver','rosybrown','lightcoral','brown','deepskyblue','olive','darkseagreen','dodgerblue','peru','pink'
         ]
 
-temp = ['경전선','중앙선','동해중부 미건설선','장항선','경부선','장항선','전라선']
 
-for i in range(7):
-    y = list(df_ac_mon.loc[temp[i]])
-    plt.plot(x,y)
-name = temp
+for i in range(len(df_ac_mon)):
+    y = list(df_ac_mon.loc[name[i]])
+    plt.plot(x,y,color = color[i])
+
 
 plt.xlabel('월')
 plt.title('예측 전력 발전량')
@@ -49,6 +49,3 @@ plt.rc('legend', fontsize=20)  # 범례 폰트 크기
 plt.legend(name,loc='upper center', ncol=2, bbox_to_anchor=(-0.4, 1))
 
 plt.show()
-
-
-# 1: 경전선, 2: 중앙선, 3: 동해중부 미건설선, 4: 장항선, 5: 경부선, 6: 장항선, 7: 전라선
