@@ -10,4 +10,4 @@
 
 # 노선의 연간 예측 발전량, 면적 
 
-<img width="989" alt="스크린샷 2022-06-27 오후 6 56 50" src="https://user-images.githubusercontent.com/62462552/175919631-f2d6bb25-257d-42cb-b13e-7b1fecf46b9f.png">
+<img width="1002" alt="스크린샷 2022-06-27 오후 7 16 29" src="https://user-images.githubusercontent.com/62462552/175919771-62436595-830f-4cfa-aeb7-53ce5a0c0792.png">
